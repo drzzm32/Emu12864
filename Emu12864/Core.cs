@@ -200,7 +200,7 @@ namespace Emu12864
                     DX.ChangeWindowMode(1);
                     DX.SetWindowStyleMode(2);
                     DX.SetWindowSize(System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width,
-                        System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height);
+                                     System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height);
                 }
                 else
                 {
@@ -257,48 +257,35 @@ namespace Emu12864
 
         public class Draw
         {
-            /*EMU写数据*/
-            private static void EMU_WrDat(int x, int y, int Dat)
-            {
-                for (int i = 0; i < 8; i++) //发送一个八位数据 
-                {
-                    Console.WriteLine((Dat << i) & 0x80);
-                    if (((Dat << i) & 0x80) != 0) DxCS.DrawPixel(x, y + 8 - i, 0xFFFFFF);
-                    else DxCS.DrawPixel(x, y + 8 - i, 0x000000);
-
-                }
-            }
-
-            /*EMU写数据，带颜色*/
-            private static void EMU_WrDat(int x, int y, int Dat, int Color)
+            /*EMU写数据，带颜色和是否透明*/
+            private static void EMU_WrDat(int x, int y, int Dat, int Color, bool Transparent)
             {
                 for (int i = 0; i < 8; i++) //发送一个八位数据 
                 {
                     Console.WriteLine((Dat << i) & 0x80);
                     if (((Dat << i) & 0x80) != 0) DxCS.DrawPixel(x, y + 8 - i, Color);
-                    else DxCS.DrawPixel(x, y + 8 - i, 0x000000);
+                    else if (!Transparent) DxCS.DrawPixel(x, y + 8 - i, 0x000000);
 
                 }
             }
 
             /*功能描述：显示6*8一组标准ASCII字符串*/
-            public static void EMU_P6x8Str(int x, int y, string Str)
+            private static void EMU_P6x8Str(int x, int y, string Str, int Color, bool Transparent)
             {
                 int c = 0, i = 0, j = 0;
                 while (j < Str.Length)
                 {
                     c = Str[j] - 32;
                     if (x > 126) { x = 0; y++; }
-
                     for (i = 0; i < 6; i++)
-                        EMU_WrDat(x + i, y, Res.F6x8[c, i]);
+                        EMU_WrDat(x + i, y, Res.F6x8[c, i], Color, Transparent);
                     x += 6;
                     j++;
                 }
             }
 
             /*功能描述：显示8*16一组标准ASCII字符串*/
-            public static void EMU_P8x16Str(int x, int y, string Str)
+            private static void EMU_P8x16Str(int x, int y, string Str, int Color, bool Transparent)
             {
                 int c = 0, i = 0, j = 0;
                 while (j < Str.Length)
@@ -307,46 +294,23 @@ namespace Emu12864
                     if (x > 120) { x = 0; y++; }
 
                     for (i = 0; i < 8; i++)
-                        EMU_WrDat(x + i, y, Res.F8X16[c, i]);
+                        EMU_WrDat(x + i, y, Res.F8X16[c, i], Color, Transparent);
                     for (i = 0; i < 8; i++)
-                        EMU_WrDat(x + i, y + 8, Res.F8X16[c, i + 8]);
+                        EMU_WrDat(x + i, y + 8, Res.F8X16[c, i + 8], Color, Transparent);
                     x += 8;
                     j++;
                 }
             }
 
-            /*功能描述：显示6*8一组标准ASCII字符串*/
-            public static void EMU_P6x8Str(int x, int y, string Str, int Color)
+            public static void DrawString(int x, int y, string Str, int Color, bool BigFont, bool Transparent)
             {
-                int c = 0, i = 0, j = 0;
-                while (j < Str.Length)
-                {
-                    c = Str[j] - 32;
-                    if (x > 126) { x = 0; y++; }
-
-                    for (i = 0; i < 6; i++)
-                        EMU_WrDat(x + i, y, Res.F6x8[c, i], Color);
-                    x += 6;
-                    j++;
-                }
+                if (BigFont) EMU_P8x16Str(x, y, Str, Color, Transparent);
+                else EMU_P6x8Str(x, y, Str, Color, Transparent);
             }
 
-            /*功能描述：显示8*16一组标准ASCII字符串*/
-            public static void EMU_P8x16Str(int x, int y, string Str, int Color)
+            public static void DrawString(string Str)
             {
-                int c = 0, i = 0, j = 0;
-                while (j < Str.Length)
-                {
-                    c = Str[j] - 32;
-                    if (x > 120) { x = 0; y++; }
-
-                    for (i = 0; i < 8; i++)
-                        EMU_WrDat(x + i, y, Res.F8X16[c, i], Color);
-                    for (i = 0; i < 8; i++)
-                        EMU_WrDat(x + i, y + 8, Res.F8X16[c, i + 8], Color);
-                    x += 8;
-                    j++;
-                }
+                EMU_P6x8Str(0, 0, Str, 0xFFFFFF, false);
             }
         }
     }

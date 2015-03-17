@@ -15,7 +15,7 @@
             MainRender();
             FPSer.Update();
             FPSer.WaitTime();
-            Core.Draw.EMU_P6x8Str(0, 0, FPSer.GetFPS().ToString("f2"));
+            Core.Draw.DrawString(FPSer.GetFPS().ToString("f1"));
         }
 
         private void MainRender()
