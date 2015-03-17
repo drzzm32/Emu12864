@@ -4,125 +4,125 @@ using DxDLL;
 
 namespace Emu12864
 {
+    public enum Keys
+    {
+        KeyBACK = 14,
+        KeyTAB = 15,
+        KeyRETURN = 28,
+        KeyLSHIFT = 42,
+        KeyRSHIFT = 54,
+        KeyLCONTROL = 29,
+        KeyRCONTROL = 157,
+        KeyESCAPE = 1,
+        KeySPACE = 57,
+        KeyPGUP = 201,
+        KeyPGDN = 209,
+        KeyEND = 207,
+        KeyHOME = 199,
+        KeyLEFT = 203,
+        KeyUP = 200,
+        KeyRIGHT = 205,
+        KeyDOWN = 208,
+        KeyINSERT = 210,
+        KeyDELETE = 211,
+        KeyMINUS = 12,
+        KeyYEN = 125,
+        KeyPREVTRACK = 144,
+        KeyPERIOD = 52,
+        KeySLASH = 53,
+        KeyLALT = 56,
+        KeyRALT = 184,
+        KeySCROLL = 70,
+        KeySEMICOLON = 39,
+        KeyCOLON = 146,
+        KeyLBRACKET = 26,
+        KeyRBRACKET = 27,
+        KeyAT = 145,
+        KeyBACKSLASH = 43,
+        KeyCOMMA = 51,
+        KeyKANJI = 148,
+        KeyCONVERT = 121,
+        KeyNOCONVERT = 123,
+        KeyKANA = 112,
+        KeyAPPS = 221,
+        KeyCAPSLOCK = 58,
+        KeySYSRQ = 183,
+        KeyPAUSE = 197,
+        KeyLWIN = 219,
+        KeyRWIN = 220,
+        KeyNUMLOCK = 69,
+        KeyNUMPAD0 = 82,
+        KeyNUMPAD1 = 79,
+        KeyNUMPAD2 = 80,
+        KeyNUMPAD3 = 81,
+        KeyNUMPAD4 = 75,
+        KeyNUMPAD5 = 76,
+        KeyNUMPAD6 = 77,
+        KeyNUMPAD7 = 71,
+        KeyNUMPAD8 = 72,
+        KeyNUMPAD9 = 73,
+        KeyMULTIPLY = 55,
+        KeyADD = 78,
+        KeySUBTRACT = 74,
+        KeyDECIMAL = 83,
+        KeyDIVIDE = 181,
+        KeyNUMPADENTER = 156,
+        KeyF1 = 59,
+        KeyF2 = 60,
+        KeyF3 = 61,
+        KeyF4 = 62,
+        KeyF5 = 63,
+        KeyF6 = 64,
+        KeyF7 = 65,
+        KeyF8 = 66,
+        KeyF9 = 67,
+        KeyF10 = 68,
+        KeyF11 = 87,
+        KeyF12 = 88,
+        KeyA = 30,
+        KeyB = 48,
+        KeyC = 46,
+        KeyD = 32,
+        KeyE = 18,
+        KeyF = 33,
+        KeyG = 34,
+        KeyH = 35,
+        KeyI = 23,
+        KeyJ = 36,
+        KeyK = 37,
+        KeyL = 38,
+        KeyM = 50,
+        KeyN = 49,
+        KeyO = 24,
+        KeyP = 25,
+        KeyQ = 16,
+        KeyR = 19,
+        KeyS = 31,
+        KeyT = 20,
+        KeyU = 22,
+        KeyV = 47,
+        KeyW = 17,
+        KeyX = 45,
+        KeyY = 21,
+        KeyZ = 44,
+        Key0 = 11,
+        Key1 = 2,
+        Key2 = 3,
+        Key3 = 4,
+        Key4 = 5,
+        Key5 = 6,
+        Key6 = 7,
+        Key7 = 8,
+        Key8 = 9,
+        Key9 = 10,
+    }
+
     public class Core
     {
         private const int ExRate = 10;
 
         public class Base
         {
-            public enum Keys
-            {
-                KeyBACK = 14,
-                KeyTAB = 15,
-                KeyRETURN = 28,
-                KeyLSHIFT = 42,
-                KeyRSHIFT = 54,
-                KeyLCONTROL = 29,
-                KeyRCONTROL = 157,
-                KeyESCAPE = 1,
-                KeySPACE = 57,
-                KeyPGUP = 201,
-                KeyPGDN = 209,
-                KeyEND = 207,
-                KeyHOME = 199,
-                KeyLEFT = 203,
-                KeyUP = 200,
-                KeyRIGHT = 205,
-                KeyDOWN = 208,
-                KeyINSERT = 210,
-                KeyDELETE = 211,
-                KeyMINUS = 12,
-                KeyYEN = 125,
-                KeyPREVTRACK = 144,
-                KeyPERIOD = 52,
-                KeySLASH = 53,
-                KeyLALT = 56,
-                KeyRALT = 184,
-                KeySCROLL = 70,
-                KeySEMICOLON = 39,
-                KeyCOLON = 146,
-                KeyLBRACKET = 26,
-                KeyRBRACKET = 27,
-                KeyAT = 145,
-                KeyBACKSLASH = 43,
-                KeyCOMMA = 51,
-                KeyKANJI = 148,
-                KeyCONVERT = 121,
-                KeyNOCONVERT = 123,
-                KeyKANA = 112,
-                KeyAPPS = 221,
-                KeyCAPSLOCK = 58,
-                KeySYSRQ = 183,
-                KeyPAUSE = 197,
-                KeyLWIN = 219,
-                KeyRWIN = 220,
-                KeyNUMLOCK = 69,
-                KeyNUMPAD0 = 82,
-                KeyNUMPAD1 = 79,
-                KeyNUMPAD2 = 80,
-                KeyNUMPAD3 = 81,
-                KeyNUMPAD4 = 75,
-                KeyNUMPAD5 = 76,
-                KeyNUMPAD6 = 77,
-                KeyNUMPAD7 = 71,
-                KeyNUMPAD8 = 72,
-                KeyNUMPAD9 = 73,
-                KeyMULTIPLY = 55,
-                KeyADD = 78,
-                KeySUBTRACT = 74,
-                KeyDECIMAL = 83,
-                KeyDIVIDE = 181,
-                KeyNUMPADENTER = 156,
-                KeyF1 = 59,
-                KeyF2 = 60,
-                KeyF3 = 61,
-                KeyF4 = 62,
-                KeyF5 = 63,
-                KeyF6 = 64,
-                KeyF7 = 65,
-                KeyF8 = 66,
-                KeyF9 = 67,
-                KeyF10 = 68,
-                KeyF11 = 87,
-                KeyF12 = 88,
-                KeyA = 30,
-                KeyB = 48,
-                KeyC = 46,
-                KeyD = 32,
-                KeyE = 18,
-                KeyF = 33,
-                KeyG = 34,
-                KeyH = 35,
-                KeyI = 23,
-                KeyJ = 36,
-                KeyK = 37,
-                KeyL = 38,
-                KeyM = 50,
-                KeyN = 49,
-                KeyO = 24,
-                KeyP = 25,
-                KeyQ = 16,
-                KeyR = 19,
-                KeyS = 31,
-                KeyT = 20,
-                KeyU = 22,
-                KeyV = 47,
-                KeyW = 17,
-                KeyX = 45,
-                KeyY = 21,
-                KeyZ = 44,
-                Key0 = 11,
-                Key1 = 2,
-                Key2 = 3,
-                Key3 = 4,
-                Key4 = 5,
-                Key5 = 6,
-                Key6 = 7,
-                Key7 = 8,
-                Key8 = 9,
-                Key9 = 10,
-            }
-
             public class FPSCounter
             {
                 /* 进行帧率计算和控制的类
@@ -165,9 +165,9 @@ namespace Emu12864
                         DX.WaitTimer(WaitTime);
                 }
 
-                public float GetFPS()
+                public void GetFPS()
                 {
-                    return FPSNum;
+                    DxCS.DxTitle(Emu12864.Properties.Resources.GameTitle + "  " + FPSNum.ToString("f2") + "fps");
                 }
             }
 
@@ -244,6 +244,11 @@ namespace Emu12864
                 DX.WaitTimer(msTime);
             }
 
+            public static void DxTitle(string Title)
+            {
+                DX.SetWindowText(Title);
+            }
+
             public static void DrawPixel(int x, int y, int Color)
             {
                 /* 绘制像素的函数
@@ -255,7 +260,7 @@ namespace Emu12864
 
         }
 
-        public class Draw
+        public class EngineBase
         {
             /*EMU写数据，带颜色和是否透明*/
             private static void EMU_WrDat(int x, int y, int Dat, int Color, bool Transparent)
@@ -302,16 +307,66 @@ namespace Emu12864
                 }
             }
 
-            public static void DrawString(int x, int y, string Str, int Color, bool BigFont, bool Transparent)
+            /*绘制字符串*/
+            public void DrawString(int x, int y, string Str, int Color, bool BigFont, bool Transparent)
             {
                 if (BigFont) EMU_P8x16Str(x, y, Str, Color, Transparent);
                 else EMU_P6x8Str(x, y, Str, Color, Transparent);
             }
 
-            public static void DrawString(string Str)
+            /*绘制字符串*/
+            public void DrawString(string Str)
             {
                 EMU_P6x8Str(0, 0, Str, 0xFFFFFF, false);
             }
+
+            /*绘制像素*/
+            public void DrawPixel(int x, int y, int Color)
+            {
+                DxCS.DrawPixel(x, y, Color);
+            }
+
+            /*获取按键*/
+            public bool GetKey(Keys Key)
+            {
+                return Base.GetKey(Key);
+            }
+        }
+    }
+
+    public class GameBase
+    {
+        private static Core.Base.FPSCounter FPSer;
+        protected Core.EngineBase Engine;
+        public GameBase()
+        {
+            FPSer = new Core.Base.FPSCounter();
+            Engine = new Core.EngineBase();
+            Start();
+        }
+
+        public void Work()
+        {
+            Core.DxCS.DxFlip();
+            MainRender();
+            FPSer.Update();
+            FPSer.WaitTime();
+            FPSer.GetFPS();
+        }
+
+        private void MainRender()
+        {
+            Loop();
+        }
+
+       public virtual void Start()
+        {
+
+        }
+
+       public virtual void Loop()
+        {
+
         }
     }
 

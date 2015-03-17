@@ -37,9 +37,9 @@
             this.ClientSize = new System.Drawing.Size(112, 0);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(128, 39);
+            this.MaximumSize = new System.Drawing.Size(128, 0);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(128, 39);
+            this.MinimumSize = new System.Drawing.Size(128, 0);
             this.Name = "Loading";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

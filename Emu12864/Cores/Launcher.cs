@@ -56,7 +56,7 @@ namespace Emu12864
 
             /* 主游戏循环
              */
-            while (!((DxDLL.DX.ProcessMessage() == -1) | Core.Base.GetKey(Core.Base.Keys.KeyESCAPE)))
+            while (!((DxDLL.DX.ProcessMessage() == -1) | Core.Base.GetKey(Keys.KeyESCAPE)))
             {
                 GameObj.Work();
             }

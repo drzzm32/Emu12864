@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Emu12864
+﻿namespace Emu12864
 {
     public class Res
     {
