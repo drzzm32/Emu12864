@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Launcher));
             this.DMPanel = new System.Windows.Forms.Panel();
             this.DMode4 = new System.Windows.Forms.RadioButton();
             this.DMode3 = new System.Windows.Forms.RadioButton();
@@ -45,7 +46,7 @@
             this.DMPanel.Controls.Add(this.DMode2);
             this.DMPanel.Controls.Add(this.DMode1);
             this.DMPanel.Location = new System.Drawing.Point(9, 6);
-            this.DMPanel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.DMPanel.Margin = new System.Windows.Forms.Padding(0);
             this.DMPanel.Name = "DMPanel";
             this.DMPanel.Size = new System.Drawing.Size(87, 76);
             this.DMPanel.TabIndex = 0;
@@ -130,6 +131,7 @@
             this.Controls.Add(this.FullScreen);
             this.Controls.Add(this.DMPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
             this.Name = "Launcher";
             this.ShowIcon = false;

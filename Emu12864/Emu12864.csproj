@@ -87,6 +87,7 @@
       <DependentUpon>Loading.cs</DependentUpon>
     </Compile>
     <Compile Include="Cores\Program.cs" />
+    <Compile Include="Images.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Cores\Res.cs" />
     <EmbeddedResource Include="Cores\Editor.resx">
@@ -98,16 +99,6 @@
     <EmbeddedResource Include="Cores\Loading.resx">
       <DependentUpon>Loading.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -127,7 +118,6 @@
     </Content>
     <Content Include="Readme.txt" />
     <Content Include="Resources\icon.ico" />
-    <None Include="Resources\icon_s.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

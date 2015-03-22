@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
+using System.Diagnostics;
 using DxDLL;
 
 namespace Emu12864
@@ -119,7 +121,6 @@ namespace Emu12864
 
     public class Core
     {
-        private const int ExRate = 10;
 
         public class Base
         {
@@ -167,7 +168,7 @@ namespace Emu12864
 
                 public void GetFPS()
                 {
-                    DxCS.DxTitle(Emu12864.Properties.Resources.GameTitle + "  " + FPSNum.ToString("f2") + "fps");
+                    DxCS.DxTitle(Launcher.GameTitle + "  " + FPSNum.ToString("f2") + "fps");
                 }
             }
 
@@ -185,6 +186,8 @@ namespace Emu12864
             /* 对DxLib的二次封装
              * 操作DxLib的函数尽量在这里进行封装
              */
+            private const int ExRate = 3;
+
             public static bool DxInit(IntPtr IconHandle, string Title, bool IsFullScreen, int Width, int Height)
             {
                 /* 游戏窗口创建
@@ -211,6 +214,7 @@ namespace Emu12864
 
                 DX.SetGraphMode(128 * ExRate, 64 * ExRate, 32);
                 DX.SetOutApplicationLogValidFlag(0);
+                //DX.SetWaitVSyncFlag(0);
                 DX.SetWindowText(Title);
                 if (DX.DxLib_Init() == -1)
                     return false;
@@ -262,12 +266,28 @@ namespace Emu12864
 
         public class EngineBase
         {
+            private const int BMPTRANS = -1;
+
+            /*图片结构体*/
+            public struct EmuBMP
+            {
+                public int[,] Dat;
+
+                public void Draw(int x, int y)
+                {
+                    int i = 0, j = 0;
+                    for (i = 0; i < Dat.GetLength(0); i++)
+                        for (j = 0; j < Dat.GetLength(1); j++)
+                           if (Dat[i,j] != -1) DxCS.DrawPixel(x + i, y + j, Dat[i, j]);
+                }
+
+            }
+
             /*EMU写数据，带颜色和是否透明*/
             private static void EMU_WrDat(int x, int y, int Dat, int Color, bool Transparent)
             {
                 for (int i = 0; i < 8; i++) //发送一个八位数据 
                 {
-                    Console.WriteLine((Dat << i) & 0x80);
                     if (((Dat << i) & 0x80) != 0) DxCS.DrawPixel(x, y + 8 - i, Color);
                     else if (!Transparent) DxCS.DrawPixel(x, y + 8 - i, 0x000000);
 
@@ -332,6 +352,55 @@ namespace Emu12864
                 return Base.GetKey(Key);
             }
         }
+
+        public class Editor
+        {
+            public static string RunCMD(string Commands, int TimeOutMS = 1000)
+            {
+                Process myProcess = new Process();
+                ProcessStartInfo myProcessStartInfo = new ProcessStartInfo("cmd.exe");
+                myProcessStartInfo.UseShellExecute = false;
+                myProcessStartInfo.RedirectStandardOutput = true;
+                myProcessStartInfo.CreateNoWindow = true;
+                myProcessStartInfo.Arguments = "/c " + Commands;
+                myProcess.StartInfo = myProcessStartInfo;
+                myProcess.Start();
+                myProcess.WaitForExit(TimeOutMS);
+                StreamReader myStreamReader = myProcess.StandardOutput;
+                string myString = myStreamReader.ReadToEnd();
+                myProcess.Close();
+                return myString;
+            }
+
+            private static int RgbToInt(int r, int g, int b)
+            {
+                return r << 16 | g << 8 | b;
+            }
+
+            public static string LoadBMP(Bitmap BMP)
+            {
+                string CookedData = "new int[,] { \n";
+                for (int i = 0; i < BMP.Width; i++)
+                {
+                    CookedData += "{ ";
+                    for (int j = 0; j < BMP.Height; j++)
+                    {
+                        if (BMP.GetPixel(i, j).A == 0)
+                        {
+                            if (j == BMP.Height - 1) CookedData += "BMPTRANS, " + " },\n";
+                            else CookedData += "BMPTRANS, ";
+                        }   
+                        else
+                        {
+                            if (j == BMP.Height - 1) CookedData += "0x" + RgbToInt(BMP.GetPixel(i, j).R, BMP.GetPixel(i, j).G, BMP.GetPixel(i, j).B).ToString("X6") + " },\n";
+                            else CookedData += "0x" + RgbToInt(BMP.GetPixel(i, j).R, BMP.GetPixel(i, j).G, BMP.GetPixel(i, j).B).ToString("X6") + ", ";
+                        }
+                    }
+                }
+                CookedData += "};";
+                return CookedData;
+            }
+        }
     }
 
     public class GameBase
@@ -359,12 +428,12 @@ namespace Emu12864
             Loop();
         }
 
-       public virtual void Start()
+        public virtual void Start()
         {
 
         }
 
-       public virtual void Loop()
+        public virtual void Loop()
         {
 
         }

@@ -6,6 +6,7 @@ namespace Emu12864
     public partial class Launcher : Form
     {
         private Game GameObj;
+        public static readonly string GameTitle = "Emu12864";
 
         public Launcher()
         {
@@ -25,24 +26,24 @@ namespace Emu12864
              */
             if (FullScreen.Checked)
             {
-                if (DMode1.Checked) if (!Core.DxCS.DxInit(Emu12864.Properties.Resources.icon.Handle, Emu12864.Properties.Resources.GameTitle, true, 1280, 720))
+                if (DMode1.Checked) if (!Core.DxCS.DxInit(this.Icon.Handle, GameTitle, true, 1280, 720))
                         goto ExitFlag;
-                if (DMode2.Checked) if (!Core.DxCS.DxInit(Emu12864.Properties.Resources.icon.Handle, Emu12864.Properties.Resources.GameTitle, true, 1600, 900))
+                if (DMode2.Checked) if (!Core.DxCS.DxInit(this.Icon.Handle, GameTitle, true, 1600, 900))
                         goto ExitFlag;
-                if (DMode3.Checked) if (!Core.DxCS.DxInit(Emu12864.Properties.Resources.icon.Handle, Emu12864.Properties.Resources.GameTitle, true, 1920, 1080))
+                if (DMode3.Checked) if (!Core.DxCS.DxInit(this.Icon.Handle, GameTitle, true, 1920, 1080))
                         goto ExitFlag;
-                if (DMode4.Checked) if (!Core.DxCS.DxInit(Emu12864.Properties.Resources.icon.Handle, Emu12864.Properties.Resources.GameTitle, true, 2560, 1440))
+                if (DMode4.Checked) if (!Core.DxCS.DxInit(this.Icon.Handle, GameTitle, true, 2560, 1440))
                         goto ExitFlag;
             }
             else
             {
-                if (DMode1.Checked) if (!Core.DxCS.DxInit(Emu12864.Properties.Resources.icon.Handle, Emu12864.Properties.Resources.GameTitle, false, 1280, 720))
+                if (DMode1.Checked) if (!Core.DxCS.DxInit(this.Icon.Handle, GameTitle, false, 1280, 720))
                         goto ExitFlag;
-                if (DMode2.Checked) if (!Core.DxCS.DxInit(Emu12864.Properties.Resources.icon.Handle, Emu12864.Properties.Resources.GameTitle, false, 1600, 900))
+                if (DMode2.Checked) if (!Core.DxCS.DxInit(this.Icon.Handle, GameTitle, false, 1600, 900))
                         goto ExitFlag;
-                if (DMode3.Checked) if (!Core.DxCS.DxInit(Emu12864.Properties.Resources.icon.Handle, Emu12864.Properties.Resources.GameTitle, false, 1920, 1080))
+                if (DMode3.Checked) if (!Core.DxCS.DxInit(this.Icon.Handle, GameTitle, false, 1920, 1080))
                         goto ExitFlag;
-                if (DMode4.Checked) if (!Core.DxCS.DxInit(Emu12864.Properties.Resources.icon.Handle, Emu12864.Properties.Resources.GameTitle, false, 2560, 1440))
+                if (DMode4.Checked) if (!Core.DxCS.DxInit(this.Icon.Handle, GameTitle, false, 2560, 1440))
                         goto ExitFlag;
             }
 
