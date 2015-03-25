@@ -3,6 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Diagnostics;
 using DxDLL;
+using OpenGL;
 
 namespace Emu12864
 {
@@ -264,6 +265,11 @@ namespace Emu12864
 
         }
 
+        public class GlCS
+        {
+            
+        }
+
         public class EngineBase
         {
             private const int BMPTRANS = -1;
@@ -401,6 +407,7 @@ namespace Emu12864
                 return CookedData;
             }
         }
+
     }
 
     public class GameBase

@@ -53,6 +53,10 @@
     <StartupObject>Emu12864.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Core86, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLs\Core86.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -115,6 +119,9 @@
     </Content>
     <Content Include="DLLs\Core64.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLLs\Core86.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Readme.txt" />
     <Content Include="Resources\icon.ico" />
